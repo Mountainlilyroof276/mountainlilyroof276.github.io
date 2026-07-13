@@ -1,30 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eunsu Lee | Researcher</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eunsu Lee — Curriculum Vitae</title>
+<style>
+  :root {
+    --ink: #111111;
+    --ink-soft: #3d3d3d;
+    --ink-faint: #757575;
+    --line: #dcdcdc;
+    --line-strong: #111111;
+    --paper: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+
+  body {
+    font-family: "Times New Roman", Times, "Nimbus Roman", serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.35;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 40px 72px;
+  }
+
+  /* ===== Header ===== */
+  header { text-align: center; padding-bottom: 26px; }
+
+  .name {
+    font-size: clamp(2.2rem, 6vw, 3.3rem);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-indent: 0.22em;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .contact {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .contact a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+  .contact a:hover, .contact a:focus-visible { color: var(--ink); border-color: var(--ink); }
+  .contact .sep { margin: 0 9px; color: var(--line); }
+
+  .rule-double {
+    margin-top: 24px;
+    border-top: 3px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    height: 6px;
+  }
+
+  /* ===== Sections ===== */
+  section { padding-top: 30px; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .section-head::before,
+  .section-head::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--line);
+  }
+  .section-head h2 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .profile-text {
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 72ch;
+    margin: 0 auto;
+  }
+
+  /* ===== Research expertise ===== */
+  .interests {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 28px;
+    list-style: none;
+  }
+  .interests li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+
+  /* ===== Entries ===== */
+  .entry { margin-bottom: 18px; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .entry-title { font-size: 1.02rem; font-weight: 700; }
+  .entry-title .org { font-weight: 400; color: var(--ink-soft); }
+  .entry-date {
+    white-space: nowrap;
+    font-size: 0.84rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+  .entry-sub { font-size: 0.94rem; color: var(--ink-soft); margin-top: 1px; }
+
+  .entry ul { margin-top: 5px; padding-left: 1.1em; }
+  .entry ul li { margin-bottom: 3px; font-size: 0.94rem; color: var(--ink-soft); }
+  .entry ul li::marker { color: var(--ink-faint); }
+
+  /* ===== Publications ===== */
+  .pubs { list-style: none; counter-reset: pub 12; }
+  .pubs li {
+    counter-increment: pub -1;
+    position: relative;
+    padding: 9px 0 9px 52px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .pubs li:first-child { border-top: 1px solid var(--line); }
+  .pubs li::before {
+    content: counter(pub, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+  .pubs .journal { font-style: italic; }
+  .pubs a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.2s;
+    font-size: 0.86rem;
+  }
+  .pubs a:hover, .pubs a:focus-visible { border-color: var(--ink); }
+  .pubs-note { margin-top: 8px; font-size: 0.84rem; font-style: italic; color: var(--ink-faint); }
+
+  .simple-list { list-style: none; }
+  .simple-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .simple-list li:first-child { border-top: 1px solid var(--line); }
+  .simple-list .journal { font-style: italic; }
+  .simple-list .year { float: right; font-style: italic; font-size: 0.84rem; color: var(--ink-faint); margin-left: 16px; }
+
+  /* ===== Skills ===== */
+  .skills { display: grid; gap: 7px; }
+  .skill-row { display: grid; grid-template-columns: 190px 1fr; gap: 20px; align-items: baseline; }
+  .skill-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .skill-value { font-size: 0.95rem; }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 3px solid var(--line-strong);
+    text-align: center;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 720px) {
+    body { font-size: 15px; }
+    .page { padding: 40px 20px 56px; }
+    .interests { grid-template-columns: 1fr; }
+    .entry-head { flex-direction: column; gap: 1px; }
+    .skill-row { grid-template-columns: 1fr; gap: 1px; }
+    .pubs li { padding-left: 38px; }
+    .contact .sep { margin: 0 6px; }
+  }
+
+  /* ===== Print ===== */
+  @media print {
+    body { font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    section { padding-top: 20px; break-inside: avoid-page; }
+    .pubs li, .entry { break-inside: avoid; }
+    a { border: none !important; }
+  }
+</style>
 </head>
-
 <body>
-  <h1>Eunsu Lee</h1>
+<div class="page">
 
-  <p>
-    Social Scientist specialising in the sociology of sport,
-    sport policy, governance, institutionalisation and digital society.
-  </p>
+  <header>
+    <h1 class="name">Eunsu Lee</h1>
+    <p class="tagline">Sport Sociologist &nbsp;·&nbsp; Sport Policy, Governance &amp; Institutionalisation &nbsp;·&nbsp; Action and Lifestyle Sports Specialist</p>
+    <p class="contact">
+      Seoul, South Korea
+      <span class="sep">/</span>
+      <a href="mailto:geniusucentre@gmail.com">geniusucentre@gmail.com</a>
+      <span class="sep">/</span>
+      +82 (0)10 5026 4482
+      <span class="sep">/</span>
+      <a href="#">LinkedIn</a>
+      <span class="sep">/</span>
+      <a href="#">ORCID</a>
+    </p>
+    <div class="rule-double" role="presentation"></div>
+  </header>
 
-  <h2>Research Interests</h2>
+  <section>
+    <div class="section-head"><h2>Academic Profile</h2></div>
+    <p class="profile-text">PhD-trained social scientist specialising in the sociology of sport, with interdisciplinary expertise in sport policy, governance, institutionalisation, professionalisation, and cultural studies. My research examines how emerging and alternative sporting practices develop into recognised, organised, and regulated forms of sport, and how these processes reshape cultural identities, communities, participation, and power relations. I have particular expertise in action and lifestyle sports, including breaking, skateboarding, parkour, and Taekwondo, with a broader interest in youth cultures, subcultures, inclusion and exclusion, and the relationship between informal sporting communities and formal institutions. I employ qualitative and mixed-methods approaches, including interviews, document analysis, discourse analysis, thematic analysis, text mining, and topic modelling.</p>
+  </section>
 
-  <p>
-    Sociology of Sport · Sport Policy and Governance ·
-    Institutionalisation · Action Sports · Digital Society
-  </p>
+  <section>
+    <div class="section-head"><h2>Research Expertise</h2></div>
+    <ul class="interests">
+      <li>Sociology of Sport</li>
+      <li>Cultural Studies</li>
+      <li>Qualitative and Mixed-Methods Research</li>
+      <li>Sport Policy and Governance</li>
+      <li>Action and Lifestyle Sports</li>
+      <li>Discourse and Thematic Analysis</li>
+      <li>Institutionalisation</li>
+      <li>Computational Social Science</li>
+      <li>Actionable Insights and Policy Recommendations</li>
+    </ul>
+  </section>
 
-  <h2>Contact</h2>
+  <section>
+    <div class="section-head"><h2>Education</h2></div>
 
-  <p>
-    Email: geniusucentre@gmail.com
-  </p>
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Ph.D., Sociology of Sport</p>
+        <span class="entry-date">Oct 2021 – Dec 2024</span>
+      </div>
+      <p class="entry-sub">Loughborough University, United Kingdom<br>Specialisation: Sport Policy, Politics and Governance; Cultural Studies</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">M.Sc., Sport Management, Politics and International Development</p>
+        <span class="entry-date">Sep 2020 – Dec 2021</span>
+      </div>
+      <p class="entry-sub">Loughborough University, United Kingdom — awarded with Distinction</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">B.S., Sport Science</p>
+        <span class="entry-date">Mar 2014 – Aug 2020</span>
+      </div>
+      <p class="entry-sub">Hanyang University ERICA, South Korea — Summa Cum Laude (GPA 4.40/4.50)</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">B.A., Culture Content Studies <span class="org">(Double Major)</span></p>
+        <span class="entry-date">Mar 2014 – Aug 2020</span>
+      </div>
+      <p class="entry-sub">Hanyang University ERICA, South Korea</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Academic &amp; Professional Experience</h2></div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Senior Research Fellow <span class="org">— Hanyang YK Intercollege, Hanyang University, Seoul</span></p>
+        <span class="entry-date">Feb 2025 – Present</span>
+      </div>
+      <ul>
+        <li>Lead applied research and institutional evaluation on first-year student experience, major selection, academic adjustment, and career development, using survey design, descriptive and cross-tabulation analysis, qualitative coding, text mining, and topic modelling.</li>
+        <li>Produce research reports and evidence-based recommendations for senior university leadership, translating findings into curriculum development, student support, and programme improvement.</li>
+        <li>Lead the design, delivery, and evaluation of the English-medium Life Project curriculum for approximately 250 first-year students, integrating lectures, workshops, and project-based learning.</li>
+        <li>Coordinate teaching and programme operations across faculty, administrative staff, and approximately 30 teaching assistants, ensuring consistent delivery and assessment.</li>
+        <li>Provide academic and career guidance to students and contribute to university-wide initiatives supporting interdisciplinary major exploration and transition into degree programmes.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Visiting Researcher <span class="org">— Kukkiwon Research Institute (World Taekwondo Headquarters), Seoul</span></p>
+        <span class="entry-date">Jun 2026 – Present</span>
+      </div>
+      <ul>
+        <li>Conduct research on Taekwondo policy, culture, and institutional development and contribute to peer-reviewed outputs for domestic and international journals.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Assistant Researcher <span class="org">— Korea Institute of Sport Science, Seoul</span></p>
+        <span class="entry-date">Aug 2023 – Oct 2023</span>
+      </div>
+      <ul>
+        <li>Conducted comparative policy research on athlete pathways, talent development, participation, and grassroots sport systems in the UK, Canada, and other international contexts.</li>
+        <li>Collected, analysed, and synthesised policy documents and programme data; contributed comparative tables, case studies, and report sections to a national sport development research project.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Physical Education Instructor <span class="org">— Dept. of Culture, Sports and Tourism, Hai Phong, Vietnam · WFK Korea Overseas Volunteers (KOICA)</span></p>
+        <span class="entry-date">Aug 2017 – Aug 2018</span>
+      </div>
+      <ul>
+        <li>Designed and delivered physical education and Taekwondo programmes for local students and community participants in collaboration with the Hai Phong Department of Culture, Sports and Tourism.</li>
+        <li>Adapted teaching to multilingual and cross-cultural settings and organised community sport activities that supported participation, inclusion, and Korea–Vietnam cultural exchange.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Peer-Reviewed Journal Articles</h2></div>
+    <ol class="pubs">
+      <li>Lee, E.*, &amp; Tak, M. (2025). From back streets to Olympic stage: The development of breaking and skateboarding in South Korea. <span class="journal">The International Journal of the History of Sport, 42</span>(1), 62–82. <a href="https://doi.org/10.1080/09523367.2025.2465694">doi:10.1080/09523367.2025.2465694</a></li>
+      <li>Lee, E. (2025). Emergence and Development of Parkour in South Korea: From Urban Subculture to Sport. <span class="journal">The Korean Society of Sports Science, 34</span>(6), 74–88. <a href="https://doi.org/10.35159/kjss.2025.10.34.6.74">doi:10.35159/kjss.2025.10.34.6.74</a></li>
+      <li>Lee, E. (2025). Introduction of the round-based win-loss system in Taekwondo: Viewer perceptions and implications. <span class="journal">The Journal of Korean Alliance of Martial Arts, 27</span>(1), 135–147. <a href="https://doi.org/10.35277/kama.2025.27.1.135">doi:10.35277/kama.2025.27.1.135</a></li>
+      <li>Lee, E. (2024). An exploration of viewers&rsquo; perceptions and experiences at action sports events in the Hangzhou 2022 Asian Game. <span class="journal">Korean Journal of Leisure, Recreation &amp; Park, 48</span>(1), 1–16. <a href="https://doi.org/10.26446/kjlrp.2024.3.48.1.1">doi:10.26446/kjlrp.2024.3.48.1.1</a></li>
+      <li>Lee, E.*, &amp; Lee, H. (2024). Sportification of Taekwondo: Taekwondo athletes&rsquo; perspectives and experiences in Power Taekwondo. <span class="journal">Taekwondo Journal of Kukkiwon, 15</span>(1), 65–77. <a href="https://doi.org/10.24881/tjk.2024.15.1.65">doi:10.24881/tjk.2024.15.1.65</a></li>
+      <li>Lee, E. (2024). Topic modelling: Comprehensive analysis of sport climbing research trends in Korea from 2000 to 2024. <span class="journal">The Korean Journal of Sports Science, 33</span>(4), 32–45. <a href="https://doi.org/10.35159/kjss.2024.8.33.4.32">doi:10.35159/kjss.2024.8.33.4.32</a></li>
+      <li>Lee, H., &amp; Lee, E.* (2024). Exploration from Action Sport: Motivation for Skateboarding. <span class="journal">The Korean Society of Sports Science, 33</span>(4), 70–84. <a href="https://doi.org/10.35159/kjss.2024.8.33.4.70">doi:10.35159/kjss.2024.8.33.4.70</a></li>
+      <li>Cho, H., Park, J., &amp; Lee, E.* (2024). Research trends in Taekwondo demonstrations from 2004 to 2023 utilizing topic modeling. <span class="journal">Korean Journal of Sport Science, 35</span>(1), 1–14. <a href="https://doi.org/10.24985/kjss.2024.35.1.1">doi:10.24985/kjss.2024.35.1.1</a></li>
+      <li>Lee, E. (2023). Exploring K-breaking research trends using LDA topic modeling. <span class="journal">The Korea Journal of Sports Science, 32</span>(6), 15–28. <a href="https://doi.org/10.35159/kjss.2023.12.32.6.15">doi:10.35159/kjss.2023.12.32.6.15</a></li>
+      <li>Lee, E.*, Lee, H., &amp; Cho, H. (2023). Kicking Higher: Australian Taekwondo Athlete&rsquo;s High-performance Pathway. <span class="journal">Taekwondo Journal of Kukkiwon, 14</span>(4), 1–13. <a href="https://doi.org/10.24881/tjk.2023.14.4.1">doi:10.24881/tjk.2023.14.4.1</a></li>
+      <li>Lee, E. (2023). A SPLISS model-based examination of GB Taekwondo&rsquo;s international success factors. <span class="journal">Taekwondo Journal of Kukkiwon, 14</span>(3), 1–10. <a href="https://doi.org/10.24881/tjk.2023.14.3.1">doi:10.24881/tjk.2023.14.3.1</a></li>
+    </ol>
+    <p class="pubs-note">* Corresponding author</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Book Chapters</h2></div>
+    <ul class="simple-list">
+      <li>Lee, E. (in preparation). Social skateboarding: &ldquo;Socialities&rdquo;&mdash;What makes skateboarding &ldquo;social&rdquo;? Invited chapter for <span class="journal">Skateboarding: Global Perspectives</span>. Bloomsbury Publishing. Expected publication 2028.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Conference Presentations</h2></div>
+    <ul class="simple-list">
+      <li>Lee, E. (2025, July 8–11). The professionalisation of Korean breaking: Where is the future of breaking heading? [Oral presentation]. 2025 World Congress of Sociology of Sport, Seoul, South Korea.</li>
+      <li>Lee, E. (2023, August 14–17). Four faces of the sportisation of breaking: Is breaking losing its own soul? [Oral presentation]. 2023 World Congress of Sociology of Sport, Ottawa, Ontario, Canada.</li>
+      <li>Lee, E. (2023, May 30–June 2). The power struggle for governance and authority in the institutionalisation of breaking [Oral presentation]. 19th Conference of the European Association for Sociology of Sport, Budapest, Hungary.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Teaching Experience</h2></div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Lecturer <span class="org">— Hanyang YK Intercollege, Hanyang University, Seoul (concurrent with Senior Research Fellow role)</span></p>
+        <span class="entry-date">Jun 2025 – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Led the curriculum design and development of Life Project, an English-only first-year undergraduate course integrating lectures and workshops, and took full responsibility for course delivery.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Lecturer <span class="org">— Sport Science, Hanyang University, Seoul (concurrent with Senior Research Fellow role)</span></p>
+        <span class="entry-date">Sep 2025 – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Independently designed and delivered an undergraduate course in Sport Humanities, with full responsibility for syllabus development, teaching materials, student assessment, grading, feedback, and overall course management.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Guest Lecturer &amp; Workshop Facilitator <span class="org">— School of Sport, Exercise and Health Sciences, Loughborough University, UK</span></p>
+        <span class="entry-date">Semester 2, 2022 &amp; 2023</span>
+      </div>
+      <ul>
+        <li>Contributed selected guest lectures and small-group workshops to the postgraduate Sport Policy and Governance module for MSc Sport Management students.</li>
+        <li>Facilitated case-based discussion and workshop activities on sport policy, governance, and the institutional development of sport.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Research Methods and Technical Skills</h2></div>
+    <div class="skills">
+      <div class="skill-row">
+        <span class="skill-label">Analysis Software</span>
+        <span class="skill-value">IBM SPSS, NVivo, NetMiner, Python</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Insight Delivery</span>
+        <span class="skill-value">Stakeholder-facing reports, data storytelling, research presentations, and strategic recommendations</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Productivity</span>
+        <span class="skill-value">Microsoft Office (Excel, PowerPoint), Google Workspace, no-code/low-code prototyping</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Teaching Qualifications</h2></div>
+    <ul class="simple-list">
+      <li>Secondary School Teacher Certificate, Level 2 in Physical Education, Ministry of Education, South Korea</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Honours &amp; Awards</h2></div>
+    <ul class="simple-list">
+      <li><span class="year">2022</span>Korea Talent Award (Prime Minister &amp; Minister of Education Award), Ministry of Education, South Korea</li>
+      <li><span class="year">2021</span>M.Sc. awarded with Distinction, Loughborough University, UK</li>
+      <li><span class="year">2020</span>Korean Government Scholarship for Overseas Study, Basic Science / Social Science track, Ministry of Education, South Korea</li>
+      <li><span class="year">2020</span>Summa Cum Laude (GPA 4.4/4.5), Hanyang University ERICA, South Korea</li>
+      <li><span class="year">2017</span>National Talent Scholarship (Arts &amp; Sports Vision), Ministry of Education, South Korea</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Other Experience</h2></div>
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Exchange Student <span class="org">— International Relations, University of Leeds, Leeds, UK</span></p>
+        <span class="entry-date">Dec 2019 – Feb 2020</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>References available upon request</footer>
+
+</div>
 </body>
 </html>
